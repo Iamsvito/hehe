@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神的語言轉換器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+        a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: blue;
+        }
+        .description {
+            font-size: 14px;
+            color: #555;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .copy-btn {
+            margin-top: 5px;
+            padding: 5px;
+            font-size: 14px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>神的語言轉換器</h1>
+        <p>輸入數字編號並選擇對應的網站，快速生成對應的連結。</p>
+        <input type="text" id="inputNumber" placeholder="輸入神的語言 (數字)">
+        <button onclick="convert()">生成連結</button>
+        <div id="links"></div>
+        <div id="error" class="error"></div>
+        <div class="description">
+            <h3>如何使用：</h3>
+            <h5>
+                *輸入一組數字編號<br>
+                *點擊「生成連結」按鈕，系統會根據輸入的編號生成對應的網站連結。<br>
+            </h5>
+            <h3>  
+                支持的網站包括： <br>  
+                紳士漫畫：5位。<br>
+                18comic.vip：6位。<br>
+                N Hentai：6位。<br>
+                Pixiv：8位。<br>
+            </h3>
+            <label for="digitLength">隨機取數(選擇數字位數)</label>
+            <select id="digitLength">
+                <option value="5">5位數</option>
+                <option value="6">6位數</option>
+                <option value="8">8位數</option>
+            </select>
+            <!-- 隨機生成數字按鈕 -->
+            <button onclick="generateRandomNumber()">隨機生成數字</button>
+            <p><b>注意：</b>這些網站涉及成人內容，請謹慎使用。</p>
+        </div>
+    </div>
+
+    <script>
+        function convert() {
+            const number = document.getElementById('inputNumber').value;
+            const linksContainer = document.getElementById('links');
+            const errorContainer = document.getElementById('error');
+            linksContainer.innerHTML = ''; // 清空之前的結果
+            errorContainer.innerHTML = ''; // 清空錯誤訊息
+
+            if (number.match(/^\d+$/)) {
+                // N Hentai 連結
+                if (number.length !== 5 && number.length !== 6 && number.length !== 8) {
+                    errorContainer.textContent = '數字編號應該是5、6或8位數字，請重新輸入！';
+                    return;
+                }
+				if (number.length === 6){
+                	const nLink = document.createElement('a');
+                    nLink.href = `https://nhentai.net/g/${number}/`;
+                    nLink.textContent = 'N Hentai 連結';
+                    nLink.target = '_blank';
+                    const nCopyBtn = document.createElement('button');
+                    nCopyBtn.textContent = '複製網址';
+                    nCopyBtn.classList.add('copy-btn');
+                    nCopyBtn.onclick = () => copyToClipboard(nLink.href);
+                    linksContainer.appendChild(nLink);
+                    linksContainer.appendChild(nCopyBtn);
+				}
+
+                // 紳士漫畫連結
+                if (number.length === 5) {
+                    const gLink = document.createElement('a');
+                    gLink.href = `https://wnacg.com/photos-index-aid-${number}.html`;
+                    gLink.textContent = '紳士漫畫連結';
+                    gLink.target = '_blank';
+                    const gCopyBtn = document.createElement('button');
+                    gCopyBtn.textContent = '複製網址';
+                    gCopyBtn.classList.add('copy-btn');
+                    gCopyBtn.onclick = () => copyToClipboard(gLink.href);
+                    linksContainer.appendChild(gLink);
+                    linksContainer.appendChild(gCopyBtn);
+                }
+
+                // Pixiv 連結
+                if (number.length === 8) {
+                    const pLink = document.createElement('a');
+                    pLink.href = `https://www.pixiv.net/artworks/${number}`;
+                    pLink.textContent = 'Pixiv 連結';
+                    pLink.target = '_blank';
+                    const pCopyBtn = document.createElement('button');
+                    pCopyBtn.textContent = '複製網址';
+                    pCopyBtn.classList.add('copy-btn');
+                    pCopyBtn.onclick = () => copyToClipboard(pLink.href);
+                    linksContainer.appendChild(pLink);
+                    linksContainer.appendChild(pCopyBtn);
+                }
+
+                // 18comic.vip 連結
+                if (number.length === 6) { // 6位數對應18comic.vip
+                    const cLink = document.createElement('a');
+                    cLink.href = `https://18comic.vip/photo/${number}.html`;
+                    cLink.textContent = '18comic.vip 連結';
+                    cLink.target = '_blank';
+                    const cCopyBtn = document.createElement('button');
+                    cCopyBtn.textContent = '複製網址';
+                    cCopyBtn.classList.add('copy-btn');
+                    cCopyBtn.onclick = () => copyToClipboard(cLink.href);
+                    linksContainer.appendChild(cLink);
+                    linksContainer.appendChild(cCopyBtn);
+                }
+            } else {
+                linksContainer.textContent = '請輸入有效的數字編號！';
+            }
+        }
+        function copyToClipboard(url) {
+            const textarea = document.createElement('textarea');
+            textarea.value = url;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('網址已複製到剪貼簿！');
+        }
+        function generateRandomNumber() {
+            const length = document.getElementById('digitLength').value;  // 取得選擇的位數
+            let randomNumber = '';
+    
+            for (let i = 0; i < length; i++) {
+                randomNumber += Math.floor(Math.random() * 10); // 隨機生成0到9的數字
+            }
+    
+            document.getElementById('inputNumber').value = randomNumber; // 將生成的隨機數字填入輸入框
+        }
+    </script>
+</body>
+</html>
+
+
