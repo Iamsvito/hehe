@@ -1,9 +1,9 @@
 const siteRules = {
-    wnacg: { lengths: [1, 2, 3, 4, 5, 6], url: (number) => `https://wnacg.com/photos-index-aid-${number}.html`, label: '紳士漫畫連結' },
-    nhentai: { lengths: [1, 2, 3, 4, 5, 6], url: (number) => `https://nhentai.net/g/${number}/`, label: 'N Hentai 連結' },
-    '18comic': { lengths: [1, 2, 3, 4, 5, 6, 7], url: (number) => `https://18comic.vip/photo/${number}.html`, label: '18comic.vip 連結' },
-    hanime: { lengths: [5, 6], url: (number) => `https://hanime1.me/comic/${number}`, label: 'Hanime 連結' },
-    pixiv: { lengths: [8], url: (number) => `https://www.pixiv.net/artworks/${number}`, label: 'Pixiv 連結' }
+    wnacg: { lengths: [1, 2, 3, 4, 5, 6], url: (number) => `https://wnacg.com/photos-index-aid-${number}.html`, label: '紳士漫畫' },
+    nhentai: { lengths: [1, 2, 3, 4, 5, 6], url: (number) => `https://nhentai.net/g/${number}/`, label: 'N Hentai ' },
+    '18comic': { lengths: [1, 2, 3, 4, 5, 6, 7], url: (number) => `https://18comic.vip/photo/${number}.html`, label: '18comic.vip ' },
+    hanime: { lengths: [5, 6], url: (number) => `https://hanime1.me/comic/${number}`, label: 'Hanime ' },
+    pixiv: { lengths: [8], url: (number) => `https://www.pixiv.net/artworks/${number}`, label: 'Pixiv ' }
 };
 
 // DOM Elements
