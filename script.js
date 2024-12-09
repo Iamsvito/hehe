@@ -16,15 +16,6 @@ const randomBtn = document.getElementById('randomBtn');
 const linksContainer = document.getElementById('links');
 const errorContainer = document.getElementById('error');
 
-// Populate site options
-Object.keys(siteRules).forEach(site => {
-    const option = document.createElement('option');
-    option.value = site;
-    option.textContent = siteRules[site].label;
-    siteSelect.appendChild(option);
-});
-
-// Update digit lengths
 siteSelect.addEventListener('change', () => {
     errorContainer.textContent = '';
     digitLengthSelect.innerHTML = '<option value="">請選擇位數</option>';
@@ -42,11 +33,17 @@ siteSelect.addEventListener('change', () => {
         generateBtn.disabled = true;
     }
 });
+// Populate site options
+Object.keys(siteRules).forEach(site => {
+    const option = document.createElement('option');
+    option.value = site;
+    option.textContent = siteRules[site].label;
+    siteSelect.appendChild(option);
+});
 
 // Generate link
 generateBtn.addEventListener('click', () => {
     const site = siteSelect.value;
-    const length = parseInt(digitLengthSelect.value, 10);
     const number = inputNumber.value.trim();
     linksContainer.innerHTML = '';
     errorContainer.textContent = '';
@@ -54,11 +51,6 @@ generateBtn.addEventListener('click', () => {
     if (!/^\d+$/.test(number)) {
         inputNumber.classList.add('error');
         errorContainer.textContent = '請輸入有效的數字編號！';
-        return;
-    }
-
-    if (number.length !== length) {
-        errorContainer.textContent = `輸入的數字位數應為 ${length} 位。`;
         return;
     }
 
@@ -87,7 +79,7 @@ clearBtn.addEventListener('click', () => {
 randomBtn.addEventListener('click', () => {
     const length = parseInt(digitLengthSelect.value, 10);
     if (isNaN(length)) {
-        errorContainer.textContent = '請先選擇網站和位數！';
+        errorContainer.textContent = '請先選擇位數！';
         return;
     }
     const randomNum = Math.floor(Math.random() * Math.pow(10, length)).toString().padStart(length, '0');
