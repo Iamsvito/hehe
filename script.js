@@ -3,9 +3,9 @@ const siteRules = {
     nhentai: { lengths: [1, 2, 3, 4, 5, 6], url: (number) => `https://nhentai.net/g/${number}/`, label: 'N Hentai ' },
     '18comic': { lengths: [1, 2, 3, 4, 5, 6, 7], url: (number) => `https://18comic.vip/photo/${number}.html`, label: '18comic.vip ' },
     hanime: { lengths: [5, 6], url: (number) => `https://hanime1.me/comic/${number}`, label: 'Hanime ' },
-    pixiv: { lengths: [8], url: (number) => `https://www.pixiv.net/artworks/${number}`, label: 'Pixiv ' }
+    pixiv: { lengths: [8], url: (number) => `https://www.pixiv.net/artworks/${number}`, label: 'Pixiv ' },
+    comicbox: { lengths: [1, 2, 3, 4], url: (number) => `https://www.comicbox.xyz/book/${number}`, label: '污污漫畫' }
 };
-
 // DOM Elements
 const siteSelect = document.getElementById('siteSelect');
 const digitLengthSelect = document.getElementById('digitLength');
@@ -15,7 +15,6 @@ const clearBtn = document.getElementById('clearBtn');
 const randomBtn = document.getElementById('randomBtn');
 const linksContainer = document.getElementById('links');
 const errorContainer = document.getElementById('error');
-
 siteSelect.addEventListener('change', () => {
     errorContainer.textContent = '';
     digitLengthSelect.innerHTML = '<option value="">請選擇位數</option>';
@@ -62,7 +61,6 @@ generateBtn.addEventListener('click', () => {
     linksContainer.appendChild(link);
     inputNumber.classList.remove('error');
 });
-
 // Clear inputs
 clearBtn.addEventListener('click', () => {
     siteSelect.value = '';
@@ -74,7 +72,6 @@ clearBtn.addEventListener('click', () => {
     linksContainer.innerHTML = '';
     errorContainer.textContent = '';
 });
-
 // Generate random number
 randomBtn.addEventListener('click', () => {
     const length = parseInt(digitLengthSelect.value, 10);
